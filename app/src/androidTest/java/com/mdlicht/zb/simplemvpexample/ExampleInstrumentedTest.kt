@@ -6,6 +6,7 @@ import android.content.ComponentName
 import android.content.Intent
 import android.net.Uri
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.intent.Intents.intended
 import androidx.test.espresso.intent.Intents.intending
@@ -17,10 +18,8 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.runner.AndroidJUnit4
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.not
+import org.junit.*
 import org.junit.Assert.assertEquals
-import org.junit.Ignore
-import org.junit.Rule
-import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
@@ -36,6 +35,16 @@ class ExampleInstrumentedTest {
     val rule = IntentsTestRule(MainActivity::class.java)
 
     val screen = MainScreen()
+
+    @Before
+    fun onBefore() {
+        IdlingRegistry.getInstance().register(IdlingResourceManager.getInstance().getIdlingResource())
+    }
+
+    @After
+    fun onAfter() {
+        IdlingRegistry.getInstance().unregister(IdlingResourceManager.getInstance().getIdlingResource())
+    }
 
     @Test
     fun 검색어_입력() {

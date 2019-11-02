@@ -9,7 +9,9 @@ import retrofit2.Response.success
 
 class MockMainRepositoryImpl : MainRepository {
     override fun searchRepository(username: String, callback: Callback<List<GitData>>) {
+        IdlingResourceManager.getInstance().increment()
         callback.onResponse(mockCall, getResponse())
+        IdlingResourceManager.getInstance().decrement()
     }
 
     private val mockCall = object : Call<List<GitData>> {

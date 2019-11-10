@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class GitViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-    val title = itemView.findViewById<TextView>(R.id.title)
-    val star = itemView.findViewById<TextView>(R.id.star)
+    private val title = itemView.findViewById<TextView>(R.id.title)
+    private val star = itemView.findViewById<TextView>(R.id.star)
 
     class Params {
         var title: String? = null

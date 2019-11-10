@@ -19,12 +19,12 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity(), MainView {
 
-    lateinit var presenter: MainPresenter
+    private lateinit var presenter: MainPresenter
 
-    lateinit var emptyText: TextView
-    lateinit var search: EditText
-    lateinit var result: RecyclerView
-    lateinit var testButton: Button
+    private lateinit var emptyText: TextView
+    private lateinit var search: EditText
+    private lateinit var result: RecyclerView
+    private lateinit var testButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(), MainView {
         presenter = MainPresenter(this)
     }
 
-    fun setView() {
+    private fun setView() {
         search = findViewById<EditText>(R.id.search).apply {
             setOnEditorActionListener { p0, p1, p2 ->
                 when(p1) {

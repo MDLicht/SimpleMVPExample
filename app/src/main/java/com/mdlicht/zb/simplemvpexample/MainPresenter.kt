@@ -8,7 +8,7 @@ class MainPresenter(val view: MainView) {
     private val repository: MainRepository = MainRepositoryInjection.provider()
 
     fun onSearchClick(text: String) {
-        repository.searchRepository(text, object : OnResponseListener<List<GitData>>() {
+        repository.searchRepository(text, object : OnResponseListener<List<GitData>> {
             override fun onError(errorMsg: String?) {
                 view.showEmptyText()
                 view.hideSearchLayout()

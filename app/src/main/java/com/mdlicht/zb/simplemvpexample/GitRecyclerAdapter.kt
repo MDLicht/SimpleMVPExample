@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class GitRecyclerAdapter: RecyclerView.Adapter<GitViewHolder>() {
 
-    val items = mutableListOf<GitData>()
+    private val items = mutableListOf<GitData>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GitViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.view_item, parent, false)

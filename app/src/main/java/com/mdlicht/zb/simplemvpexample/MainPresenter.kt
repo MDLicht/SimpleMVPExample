@@ -1,38 +1,32 @@
 package com.mdlicht.zb.simplemvpexample
 
 import android.content.Intent
-import retrofit2.Call
-import retrofit2.Response
+import com.mdlicht.zb.simplemvpexample.api.OnResponseListener
 
 class MainPresenter(val view: MainView) {
 
     private val repository: MainRepository = MainRepositoryInjection.provider()
 
     fun onSearchClick(text: String) {
-        repository.searchRepository(text, object : retrofit2.Callback<List<GitData>> {
-            override fun onFailure(call: Call<List<GitData>>, t: Throwable) {
+        repository.searchRepository(text, object : OnResponseListener<List<GitData>>() {
+            override fun onError(errorMsg: String?) {
                 view.showEmptyText()
                 view.hideSearchLayout()
             }
 
-            override fun onResponse(
-                call: Call<List<GitData>>,
-                response: Response<List<GitData>>
-            ) {
-                if (response.isSuccessful) {
-                    val result = response.body()
+            override fun onFail(errorCode: Int, errorMsg: String?) {
+                view.showEmptyText()
+                view.hideSearchLayout()
+            }
 
-                    if (result == null || result.isEmpty()) {
-                        view.showEmptyText()
-                        view.hideSearchLayout()
-                    } else {
-                        view.showSearchLayout()
-                        view.updateSearchResult(result)
-                        view.hideEmptyText()
-                    }
-                } else {
+            override fun onResponse(response: List<GitData>?) {
+                if (response.isNullOrEmpty()) {
                     view.showEmptyText()
                     view.hideSearchLayout()
+                } else {
+                    view.showSearchLayout()
+                    view.updateSearchResult(response)
+                    view.hideEmptyText()
                 }
             }
         })

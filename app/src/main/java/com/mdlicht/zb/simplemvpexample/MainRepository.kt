@@ -1,8 +1,8 @@
 package com.mdlicht.zb.simplemvpexample
 
-import retrofit2.Callback
+import com.mdlicht.zb.simplemvpexample.api.OnResponseListener
 
 interface MainRepository {
 
-    fun searchRepository(username: String, callback: Callback<List<GitData>>)
+    fun searchRepository(username: String, listener: OnResponseListener<List<GitData>>)
 }
